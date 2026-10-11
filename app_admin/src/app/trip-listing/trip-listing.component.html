@@ -1,0 +1,10 @@
+
+<h2>Available Trips</h2>
+
+<div *ngIf="trips.length === 0">
+  No trips available.
+</div>
+
+<div *ngFor="let trip of trips">
+  <app-trip-card [trip]="trip"></app-trip-card>
+</div>

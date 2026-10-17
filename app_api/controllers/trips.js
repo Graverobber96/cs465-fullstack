@@ -37,7 +37,45 @@ const tripsFindByCode = async (req, res) => {
     }
 };
 
+ // POST /api/trips - Create a new trip
+ const tripsAddTrip = async (req, res) => {
+   try {
+     const newTrip = await Trip.create(req.body);
+     return res.status(201).json(newTrip);
+   } catch (err) {
+     return res.status(400).json({
+       message: 'Error creating trip',
+       error: err.message
+     });
+   }
+ };
+
+// PUT /api/trips/:tripCode - Update an existing trip
+const tripsUpdateTrip = async (req, res) => {
+  try {
+    const updatedTrip = await Trip.findOneAndUpdate(
+      { code: req.params.tripCode },
+      req.body,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedTrip) {
+      return res.status(404).json({
+        message: 'Trip not found'
+      });
+    }
+
+    return res.status(200).json(updatedTrip);
+  } catch (err) {
+    return res.status(400).json({
+      message: 'Error updating trip',
+      error: err.message
+    });
+  }
+};
 module.exports = {
-    tripsList,
-    tripsFindByCode
+  tripsList,
+  tripsFindByCode,
+  tripsAddTrip,
+  tripsUpdateTrip
 };

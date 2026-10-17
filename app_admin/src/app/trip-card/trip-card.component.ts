@@ -1,5 +1,5 @@
-
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Trip } from '../trip';
 
 @Component({
@@ -11,4 +11,11 @@ import { Trip } from '../trip';
 })
 export class TripCardComponent {
   @Input() trip!: Trip;
+
+  constructor(private router: Router) {}
+
+  editTrip(): void {
+    localStorage.setItem('tripCode', this.trip.code);
+    this.router.navigate(['/edit-trip']);
+  }
 }

@@ -73,9 +73,34 @@ const tripsUpdateTrip = async (req, res) => {
     });
   }
 };
+
+ // DELETE /api/trips/:tripCode - Delete an existing trip
+const tripsDeleteTrip = async (req, res) => {
+  try {
+    const deletedTrip = await Trip.findOneAndDelete({
+      code: req.params.tripCode
+    });
+
+    if (!deletedTrip) {
+      return res.status(404).json({
+        message: 'Trip not found'
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Trip deleted successfully'
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: 'Error deleting trip',
+      error: err.message
+    });
+  }
+};
 module.exports = {
   tripsList,
   tripsFindByCode,
   tripsAddTrip,
-  tripsUpdateTrip
+  tripsUpdateTrip,
+  tripsDeleteTrip
 };

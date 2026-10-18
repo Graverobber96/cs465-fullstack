@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card shadow-sm mb-4">
   <div class="card-body">
     <h3>{{ trip.name }}</h3>
     <p><strong>Trip Code:</strong> {{ trip.code }}</p>
@@ -7,6 +7,6 @@
     <p><strong>Resort:</strong> {{ trip.resort }}</p>
     <p><strong>Price Per Person:</strong> {{ trip.perPerson }}</p>
     <p>{{ trip.description }}</p>
-    <button type="button" (click)="editTrip()">Edit Trip</button>
+    <button type="button" class="btn btn-primary" (click)="editTrip()">Edit Trip</button>
   </div>
 </div>

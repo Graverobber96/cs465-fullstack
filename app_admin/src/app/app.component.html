@@ -1,10 +1,24 @@
+
 <h1>Travlr Getaways - Admin</h1>
 
 <nav>
-  <a href="/">Available Trips</a> |
-  <a href="/add-trip">Add Trip</a>
+  <a routerLink="/">Available Trips</a> |
+  <a routerLink="/add-trip">Add Trip</a> |
+
+  <a *ngIf="!authService.isLoggedIn()" routerLink="/login">
+    Login
+  </a>
+
+  <button
+    *ngIf="authService.isLoggedIn()"
+    type="button"
+    class="btn btn-outline-danger btn-sm"
+    (click)="logout()">
+    Logout
+  </button>
 </nav>
 
 <hr>
 
 <router-outlet></router-outlet>
+
